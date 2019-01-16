@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchDetail } from '../actions/index';
-import UserDetails from './UserDetails';
+import UserList from './UserList';
 
 class SearchUsers extends Component{
   state = {
@@ -33,7 +33,7 @@ class SearchUsers extends Component{
                <button type="submit" className="btn btn-primary">Search</button>
             </span>
           </form>
-          <UserDetails />
+          <UserList />
         </div>
     );
   }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-class UserDetails extends Component{
+class UserList extends Component{
 
   renderList(){
        let {users} = this.props;
@@ -45,4 +45,4 @@ const mapStateToProps = (state) =>{
   }
 }
 
-export default connect(mapStateToProps)(UserDetails);
+export default connect(mapStateToProps)(UserList);
