@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import moment from 'moment';
-//import Dropdown from './Dropdown';
 
 class RepoPage extends Component{
   state = {
@@ -21,10 +20,39 @@ class RepoPage extends Component{
     this.setState({ display: !this.state.display });
   }
 
+  clickedName = (e) =>{
+    axios.get(`https://api.github.com/users/${this.props.username}/repos?sort=full_name`)
+       .then(res => {
+         this.setState({ repos: res.data, display: false});
+       });
+  }
+
+  clickedCreatedDate = (e) =>{
+    axios.get(`https://api.github.com/users/${this.props.username}/repos?sort=created`)
+       .then(res => {
+         this.setState({ repos: res.data, display: false});
+       });
+  }
+
+  clickedUpdatedDate = (e) =>{
+    axios.get(`https://api.github.com/users/${this.props.username}/repos?sort=updated`)
+       .then(res => {
+         this.setState({ repos: res.data, display: false});
+       });
+  }
+
+  clickedPushedDate = (e) =>{
+    axios.get(`https://api.github.com/users/${this.props.username}/repos?sort=pushed`)
+       .then(res => {
+         this.setState({ repos: res.data, display: false});
+       });
+  }
+
    render(){
      const {repos, display} = this.state;
      return(
        <div className = 'repo-component' style = {{marginTop:'50px'}}>
+
 
          <div className = 'dropdown' style = {{paddingBottom:'10px'}}>
            <button className="btn" onClick = {this.toggleMenu}>Sort By <i className="fas fa-sort-down"/></button>
@@ -32,15 +60,22 @@ class RepoPage extends Component{
              <ul className = 'list-group group-style'>
                 <li className = 'list-group-item li-style-top'>Select type:</li>
                 <li className = 'list-group-item li-style'
-                    >
-                    Full Name
+                    onClick = {this.clickedName}>Full Name
                 </li>
-                <li className = 'list-group-item li-style'>Created Date</li>
-                <li className = 'list-group-item li-style'>Updated Date</li>
-                <li className = 'list-group-item li-style'>Pushed Date</li>
+                <li className = 'list-group-item li-style'
+                    onClick = {this.clickedCreatedDate}>Created Date
+                </li>
+                <li className = 'list-group-item li-style'
+                    onClick = {this.clickedUpdatedDate}>Updated Date
+                </li>
+                <li className = 'list-group-item li-style'
+                    onClick = {this.clickedPushedDate}>Pushed Date
+                </li>
              </ul>
            ) : null}
          </div>
+
+
 
           {repos.map(item => {
             return(
